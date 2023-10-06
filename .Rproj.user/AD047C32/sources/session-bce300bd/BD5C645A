@@ -3,7 +3,7 @@
     "path": "~/Downloads/Summer Internship/sugaR/R/analysis.R",
     "project_path": "R/analysis.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "315079190",
     "contents": "",
     "dirty": false,
     "created": 1689864280207.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "382,0",
+        "cursorPosition": "2,0",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1690581404,
+    "lastKnownWriteTime": 1696624578,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1690581405002,
+    "last_content_update": 1696624578460,
     "read_only": false,
     "read_only_alternatives": []
 }

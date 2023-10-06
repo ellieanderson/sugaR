@@ -1,4 +1,5 @@
 # pacman::p_load(tidyverse, mosaic, magrittr, readxl, car, ggsignif, paletteer, rlang)
+require(usethis)
 usethis::use_package("ggsignif")
 usethis::use_package("rlang")
 # usethis::use_package("tidyverse")
