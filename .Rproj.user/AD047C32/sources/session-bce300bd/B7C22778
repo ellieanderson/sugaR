@@ -3,7 +3,7 @@
     "path": "~/Downloads/Summer Internship/sugaR/DESCRIPTION",
     "project_path": "DESCRIPTION",
     "type": "dcf",
-    "hash": "0",
+    "hash": "3324607074",
     "contents": "",
     "dirty": false,
     "created": 1696625414133.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "22,11",
+        "cursorPosition": "21,12",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1696625425,
+    "lastKnownWriteTime": 1696625719,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1696625425685,
+    "last_content_update": 1696625719675,
     "read_only": false,
     "read_only_alternatives": []
 }
