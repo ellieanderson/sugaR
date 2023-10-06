@@ -1,0 +1,26 @@
+{
+    "id": "D5BE97F4",
+    "path": "~/Downloads/Summer Internship/sugaR/tests/testthat/test_analysis.R",
+    "project_path": "tests/testthat/test_analysis.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1689862676212.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "87,3",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1689876530,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1689876530471,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,158 @@
+---
+title: "Glycan Analysis Workflow"
+author: "Ellie Anderson"
+date: "2023-07-28"
+output: 
+  html_document:
+    code_folding: hide
+    theme: paper
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+# load your libraries!
+library(tidyverse)
+library(sugaR)
+library(paletteer)
+library(DT)
+```
+
+## Data
+
+```{r data}
+# change the filepath to the path of your assay
+dat1 <- read_csv("/Users/ellieanderson/Library/CloudStorage/Box-Box/Duke Biostats Summer Internship_Schuster_Anderson_2023/Data/raw_mice_assay.csv") %>%
+  drop_na() %>%
+  # Group by sample for upcoming columns
+  group_by(`Sample File Name`) %>%
+  mutate(
+    # adjust individual areas to show that there are 2 of some components
+    adj_area = if_else(str_detect(Allele, "2"), Area * 2, Area),
+    # Calculate total area for each sample
+    total_area = sum(Area),
+    # Calculate adjusted area for the species w 2 of same component
+    adj_tot_area = sum(adj_area),
+    # Calculate relative abundance of each allele in each sample (%)
+    rel_abundance = if_else(str_detect(Allele, "2"),
+                            (adj_area / adj_tot_area) * 100,
+                            (Area / total_area) * 100)
+  ) %>%
+  # get rid of grouping
+  ungroup() %>%
+  # determine what glycans are included in each allele
+  mutate(
+    G = case_when(
+      str_detect(Allele, "G") &
+        !str_detect(Allele, "G0") &
+        !str_detect(Allele, "G2") ~ 1,
+      TRUE ~ 0
+    ),
+    G2 = if_else(str_detect(Allele, "G2"), 1, 0),
+    F = if_else(str_detect(Allele, "F"), 1, 0),
+    S = case_when(
+      str_detect(Allele, "S") &
+        !str_detect(Allele, "S2") ~ 1,
+      TRUE ~ 0
+    ),
+    S2 = if_else(str_detect(Allele, "S2"), 1, 0),
+    B = if_else(str_detect(Allele, "B"), 1, 0),
+    A = if_else(str_detect(Allele, "A"), 1, 0)
+  )
+
+dat2 <- dat1 %>%
+  get_percs("G", "Sample File Name") %>%
+  get_percs("G2", "Sample File Name") %>%
+  get_percs("F", "Sample File Name") %>%
+  get_percs("S", "Sample File Name") %>%
+  get_percs("S2", "Sample File Name") %>%
+  get_percs("B", "Sample File Name") %>%
+  get_percs("A", "Sample File Name") %>%
+  get_tots("G", "Sample File Name", "Allele") %>%
+  get_tots("S", "Sample File Name", "Allele") %>%
+  mutate(group = substring(`Sample File Name`, 1, 2)) %>% 
+  filter(!group %in% c("Hu", "Ag"))# this command may not need to be present if groups are indicated another way
+```
+
+```{r}
+# view the data
+head(dat2) %>% datatable(
+  extensions = 'FixedColumns',
+  options = list(
+    dom = 't',
+    scrollX = TRUE,
+    fixedColumns = TRUE
+  ))
+```
+
+## Overall Plots
+
+```{r}
+dat2 %>%
+  # if you want to change the names of the axes, use the rename() function (shown below) to
+  # rename the columns, which will then rename the axes. In the current state, the 
+  # rel_abundance column was renamed to "Relative Abundance" and Allele was renamed to
+  # "Glycan" 
+  rename("Relative Abundance" = rel_abundance,
+         "Glycan" = Allele) %>%
+  plot_overall(x = "Glycan", y = "Relative Abundance", group = "group") 
+```
+
+## Analysis
+
+```{r}
+dat2 %>%
+  # once again, renaming for plots
+  rename("Glycan" = Allele,
+         "Relative_Abundance" = rel_abundance) %>%
+  # get rid of any groups you don't want
+  filter(!group %in% c("Hu", "Ag")) %>%
+  analyze(
+    col = "Glycan", x = "group", y = "Relative_Abundance",
+    p_value = .05, id_col = "Sample File Name"
+  )
+```
+
+# Individual Components
+
+```{r}
+# to look at components, a little more preprocessing could be done
+dat3 <- dat2 %>%
+  pivot_longer(cols = "G_perc":"tot_S", 
+               names_to = "Component", values_to = "Percentage") %>%
+  filter(Component != "A_perc")
+```
+
+```{r}
+# look at the data
+head(dat3) %>% datatable(
+  extensions = 'FixedColumns',
+  options = list(
+    dom = 't',
+    scrollX = TRUE,
+    fixedColumns = TRUE
+  )
+)
+```
+
+
+```{r}
+# your plots
+dat3 %>%
+  plot_overall(x = "Component", y = "Percentage", group = "group") 
+```
+
+```{r}
+# the analysis - the difference between this and the analysis above is the names of the columns being used
+dat3 %>%
+  filter(!group %in% c("Hu", "Ag")) %>%
+  analyze(
+    col = "Component", x = "group", y = "Percentage",
+    p_value = .05, id_col = "Sample File Name"
+  )
+```
+
+
+
+
+
+
