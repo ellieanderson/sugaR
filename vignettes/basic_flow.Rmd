@@ -2,7 +2,7 @@
 title: "The Basic Flow"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{The Basic Flow}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,7 +24,7 @@ library(pander)
 The purpose of this package is to provide a clear and simple pipeline to analyse the raw data from _________. The raw data comes in .csv format and also includes a visual representation like shown here.
 
 ```{r, out.width = 600, echo = FALSE}
-knitr::include_graphics("peaks.png")
+knitr::include_graphics("../man/figures/peaks.png")
 ```
 
 The gray bars signify specific glycan species while the peaks tell us how much of that species is present. 

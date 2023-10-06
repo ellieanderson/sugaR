@@ -1,9 +1,9 @@
 {
     "id": "28A55C2A",
-    "path": "~/Downloads/Summer Internship/sugaR/vignettes/my-vignette.Rmd",
-    "project_path": "vignettes/my-vignette.Rmd",
+    "path": "~/Downloads/Summer Internship/sugaR/vignettes/basic_flow.Rmd",
+    "project_path": "vignettes/basic_flow.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "1433281388",
     "contents": "",
     "dirty": false,
     "created": 1694555279538.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "124,29",
+        "cursorPosition": "4,37",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1690547206,
+    "lastKnownWriteTime": 1696621436,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1690547206,
+    "last_content_update": 1696621436873,
     "read_only": false,
     "read_only_alternatives": []
 }
