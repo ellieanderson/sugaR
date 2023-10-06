@@ -15,12 +15,12 @@ Imports:
     paletteer,
     readxl,
     rlang,
-    tidyverse
+    testthat,
+    tidyverse,
+    usethis
 Suggests: 
     knitr,
-    rmarkdown,
-    testthat
-    usethis
+    rmarkdown
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
