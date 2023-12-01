@@ -56,7 +56,7 @@ The columns shown in this example dataframe must be present in some form, howeve
 For the rest of the tutorial, we'll use a slightly larger sample dataset that has had some additional cleaning. 
 
 ```{r}
-mice <- readRDS("fake_mice_serum.rds")
+mice <- readRDS("../fake_mice_serum.rds")
 
 head(mice) %>% pander()
 ```
