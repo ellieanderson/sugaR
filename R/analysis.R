@@ -29,7 +29,7 @@ check_groups <- function(df, group_col, id_col) {
   rid <- df %>%
     group_by({{group_col}}) %>%
     dplyr::summarize(count = length(unique({{id_col}}))) %>%
-    filter(count < 3) %>%
+    filter(count < 2) %>%
     select({{group_col}})
 
   # if the previous code selected any groups...
@@ -281,6 +281,7 @@ analyze <- function(df, col, x, y, p_value, id_col,
         # if there's a difference...
         if (te[[1]]$p.value < .05) {
           # TODO: change .05 to variable?
+          # TODO: add check to make sure te pval isn't NA
             # run pairwise tests
             l <- df %>%
               pair_test(values = y, groups = x, p_value = p_value,
@@ -357,7 +358,7 @@ plot_overall <- function(df, x, y, group){
     theme_bw() +
     theme(plot.title = element_text(hjust = .5),
           axis.text.x = element_text(angle = 45,
-                                     vjust = .25))
+                                     vjust = .35))
 
   b <- df %>%
     group_by({{x}}, {{group}}) %>%
@@ -371,8 +372,8 @@ plot_overall <- function(df, x, y, group){
          fill = str_to_title(paste({{x}}))) +
     theme_bw() +
     theme(plot.title = element_text(hjust = .5),
-          panel.grid.minor = element_blank(),
-          axis.text.x = element_text(angle = 45, vjust = .25))
+          panel.grid.minor = element_blank())
+          # axis.text.x = element_text(angle = 45, vjust = .25))
 
   print(a)
   print(b)

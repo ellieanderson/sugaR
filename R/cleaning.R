@@ -44,7 +44,7 @@ get_percs <- function(data, glycan, id_col){
                                 round((sum({{a}})/{{b}})*100, 2),
                                 # if the glycan is NOT present, take the
                                 # percentage calulated and subtract from 100
-                                100 - round((sum({{a}})/{{b}})*100, 2)
+                                round(100 - (sum({{a}})/{{b}})*100,2)
     )
     )
 
@@ -84,9 +84,9 @@ get_tots <- function(df, glycan, unique_id, species){
     # and then divide by the adjusted total area to
     # get the relative abundance according to adjusted
     # totals
-    mutate("tot_{{glycan}}" := sum(adj_area[
+    mutate("tot_{{glycan}}" := round(sum(adj_area[
       str_detect({{species}}, paste(glycan)) &
-        !str_detect({{species}}, "0")])/adj_tot_area*100)
+        !str_detect({{species}}, "0")])/adj_tot_area*100, 4))
 
   return(dat)
 }
