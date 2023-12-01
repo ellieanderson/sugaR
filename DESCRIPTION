@@ -18,7 +18,8 @@ Imports:
     testthat,
     tidyverse,
     usethis, 
-    pacman
+    pacman,
+    pander
 Suggests: 
     knitr,
     rmarkdown
