@@ -304,7 +304,7 @@ analyze <- function(df, col, x, y, p_value, id_col,
               plt_fin <- plt +
                 ggsignif::geom_signif(mapping = aes(group = as.factor({{x}})),
                             comparisons = lapply(l[2][[1]],
-                                                 function(st) unlist(str_split(st, ","))),
+                                                 function(st) unlist(str_split(st, " ~ "))),
                             map_signif_level = c("*" = .05),
                             y_position = unlist(heights))
 
