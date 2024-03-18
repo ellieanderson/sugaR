@@ -306,19 +306,20 @@ analyze <- function(df, col, x, y, p_value, id_col,
                             comparisons = lapply(l[2][[1]],
                                                  function(st) unlist(str_split(st, " ~ "))),
                             map_signif_level = c("*" = .05),
-                            y_position = unlist(heights))
+                            y_position = unlist(heights),
+                            vjust = .5)
 
               final_results <- final_results %>%
                 append(list("Name" = a,
-                          "Kruskall.Wallis" = te[1],
+                          "Kruskall.Wallis" = te[1][[1]],
                           "Plot" = plt_fin,
                           "Pairwise" = l))
               } else{
                 print(paste("No significant pairwise comparisons for ", a))
               }
           } else {  # if no difference between treatment groups...
-            print(a)
-            print("No significant difference")
+            # print(a)
+            cat("No significant difference between groups for", a, "\n")
           }
         } else {
           print("No comparisons run")
