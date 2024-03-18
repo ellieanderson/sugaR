@@ -196,8 +196,8 @@ pair_test <- function(df, values, groups, p_value,
         test_result <- wilcox.test(x = group1, y = group2)
 
         # insert results
-        results[i, j] <- test_result$p.value
-        results[j, i] <- test_result$p.value
+        results[i, j] <- round(test_result$p.value, 3)
+        results[j, i] <- round(test_result$p.value, 3)
 
 
       if (!is.na(test_result$p.value)){
@@ -205,7 +205,7 @@ pair_test <- function(df, values, groups, p_value,
         if(test_result$p.value < p_value){
 
           # add to list of significant values
-          sig <- sig %>% append(paste0(group_list[i], ",", group_list[j]))
+          sig <- sig %>% append(paste(group_list[i], "~", group_list[j]))
           }
         } else{
         print("Comparison not valid bc of NAs")
@@ -217,7 +217,7 @@ pair_test <- function(df, values, groups, p_value,
     }
     final <- final %>%
       append(list("p.values" = results,
-                  "significant" = sig))
+                  "significant" = unlist(sig)))
   }
   return(final)
 
@@ -356,9 +356,9 @@ plot_overall <- function(df, x, y, group){
          y = str_to_title(paste("Average", {{y}}, "(%)")),
          fill = str_to_title(paste({{group}}))) +
     theme_bw() +
-    theme(plot.title = element_text(hjust = .5),
-          axis.text.x = element_text(angle = 45,
-                                     vjust = .35))
+    theme(plot.title = element_text(hjust = .5))
+          # axis.text.x = element_text(angle = 45,
+          #                            vjust = .35))
 
   b <- df %>%
     group_by({{x}}, {{group}}) %>%
