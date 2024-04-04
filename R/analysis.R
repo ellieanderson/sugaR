@@ -340,41 +340,45 @@ analyze <- function(df, col, x, y, p_value, id_col,
 #'
 #' @examples
 plot_overall <- function(df, x, y, group){
-  x <- as.name(x)
+  x1 <- as.name(x)
   y <- as.name(y)
   group <- as.name(group)
 
   a <- df %>%
-    group_by({{x}}, {{group}}) %>%
+    group_by({{x1}}, {{group}}) %>%
     summarize(avg = mean({{y}}, na.rm = TRUE)) %>%
-    ggplot(aes(x = {{x}}, y = avg,
+    ggplot(aes(x = {{x1}}, y = avg,
                fill = as.factor({{group}}),
                group = as.factor({{group}}))) +
     geom_col(position = "dodge") +
     scale_fill_manual(values = paletteer_d("ggsci::category20_d3")) +
-    labs(title = str_to_title(paste({{x}}, {{y}}, "Across Groups")),
-         x = str_to_title(paste({{x}})),
+    labs(title = str_to_title(paste({{x1}}, {{y}}, "Across Groups")),
+         x = str_to_title(paste({{x1}})),
          y = str_to_title(paste("Average", {{y}}, "(%)")),
          fill = str_to_title(paste({{group}}))) +
     theme_bw() +
-    theme(plot.title = element_text(hjust = .5))
-          # axis.text.x = element_text(angle = 45,
-          #                            vjust = .35))
+    theme(plot.title = element_text(hjust = .5),
+          axis.text.x = element_text(angle = 90)) +                                                                    #                            vjust = .35))) +
+    facet_wrap(~group, scale = "free")
+          #
 
   b <- df %>%
-    group_by({{x}}, {{group}}) %>%
+    group_by({{x1}}, {{group}}) %>%
     summarize(avg = mean({{y}}, na.rm = TRUE)) %>%
-    ggplot(aes(x = as.factor({{group}}), y = avg, fill = {{x}}, group = {{x}})) +
+    ggplot(aes(x = as.factor({{group}}), y = avg,
+               fill = {{x1}}, group = {{x1}})) +
     geom_col(position = "dodge") +
     scale_fill_manual(values = paletteer_d("ggsci::category20_d3")) +
     labs(title = str_to_title(paste0(x, " ", y, " Across ", group, "s")),
          x = str_to_title(paste({{group}})),
          y = str_to_title(paste("Average", {{y}}, "(%)")),
-         fill = str_to_title(paste({{x}}))) +
+         fill = str_to_title(paste({{x1}}))) +
     theme_bw() +
     theme(plot.title = element_text(hjust = .5),
-          panel.grid.minor = element_blank())
-          # axis.text.x = element_text(angle = 45, vjust = .25))
+          panel.grid.minor = element_blank(),
+          axis.text.x = element_text(angle = 90, vjust = .25)) +
+    facet_wrap(vars({{x1}}))
+    # facet_wrap(~group, scale = "free")
 
   print(a)
   print(b)
