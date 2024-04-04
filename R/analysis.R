@@ -220,7 +220,6 @@ pair_test <- function(df, values, groups, p_value,
                   "significant" = unlist(sig)))
   }
   return(final)
-
 }
 
 #' Loop the whole thing
@@ -360,7 +359,6 @@ plot_overall <- function(df, x, y, group){
     theme(plot.title = element_text(hjust = .5),
           axis.text.x = element_text(angle = 90)) +                                                                    #                            vjust = .35))) +
     facet_wrap(~group, scale = "free")
-          #
 
   b <- df %>%
     group_by({{x1}}, {{group}}) %>%
@@ -369,7 +367,7 @@ plot_overall <- function(df, x, y, group){
                fill = {{x1}}, group = {{x1}})) +
     geom_col(position = "dodge") +
     scale_fill_manual(values = paletteer_d("ggsci::category20_d3")) +
-    labs(title = str_to_title(paste0(x, " ", y, " Across ", group, "s")),
+    labs(title = str_to_title(paste0(x, " ", y, " within ", group, "s")),
          x = str_to_title(paste({{group}})),
          y = str_to_title(paste("Average", {{y}}, "(%)")),
          fill = str_to_title(paste({{x1}}))) +
