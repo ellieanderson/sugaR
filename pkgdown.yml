@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   basic_flow: basic_flow.html
-last_built: 2024-04-04T00:37Z
+last_built: 2024-04-04T13:57Z
 urls:
   reference: https://ellieanderson.github.io/sugaR/reference
   article: https://ellieanderson.github.io/sugaR/articles
